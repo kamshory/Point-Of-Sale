@@ -21,7 +21,7 @@ USE `point_of_sale` ;
 -- Table `point_of_sale`.`manufacturer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`manufacturer` (
-  `manufacturer_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `manufacturer_id` VARCHAR(40) NOT NULL,
   `name` VARCHAR(100) NULL,
   `logo` TEXT NULL,
   `phone` VARCHAR(20) NULL,
@@ -43,8 +43,8 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`brand`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`brand` (
-  `brand_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `manufacturer_id` BIGINT NULL,
+  `brand_id` VARCHAR(40) NOT NULL,
+  `manufacturer_id` VARCHAR(40) NULL,
   `name` VARCHAR(100) NULL,
   `time_create` DATETIME NULL,
   `time_edit` DATETIME NULL,
@@ -67,11 +67,11 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`item` (
-  `item_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `item_id` VARCHAR(40) NOT NULL,
   `barcode` VARCHAR(40) NULL,
   `name` VARCHAR(100) NULL,
   `description` TEXT NULL,
-  `brand_id` BIGINT NULL,
+  `brand_id` VARCHAR(40) NULL,
   `type` VARCHAR(100) NULL,
   `model` VARCHAR(100) NULL,
   `size` VARCHAR(100) NULL,
@@ -100,7 +100,7 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`customer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`customer` (
-  `customer_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `customer_id` VARCHAR(40) NOT NULL,
   `name` VARCHAR(100) NULL,
   `customer_type_id` VARCHAR(5) NULL,
   `gender` CHAR(1) NULL,
@@ -145,7 +145,7 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`store`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`store` (
-  `store_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `store_id` VARCHAR(40) NOT NULL,
   `name` VARCHAR(45) NULL,
   `phone` VARCHAR(20) NULL,
   `email` VARCHAR(100) NULL,
@@ -168,9 +168,9 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`sales`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`sales` (
-  `sales_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
-  `customer_id` BIGINT NULL,
+  `sales_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
+  `customer_id` VARCHAR(40) NULL,
   `invoice` VARCHAR(32) NULL,
   `subtotal` DOUBLE NULL,
   `discount` DOUBLE NULL,
@@ -208,11 +208,11 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`sales_detail`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`sales_detail` (
-  `sales_detail_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
-  `sales_id` BIGINT NULL,
-  `customer_id` BIGINT NULL,
-  `item_id` BIGINT NULL,
+  `sales_detail_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
+  `sales_id` VARCHAR(40) NULL,
+  `customer_id` VARCHAR(40) NULL,
+  `item_id` VARCHAR(40) NULL,
   `quantity` INT NULL,
   `price` DOUBLE NULL,
   `discount` DOUBLE NULL,
@@ -253,9 +253,9 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`item_circulation`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`item_circulation` (
-  `item_circulation_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
-  `item_id` BIGINT NULL,
+  `item_circulation_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
+  `item_id` VARCHAR(40) NULL,
   `ready_stock_in` INT NULL,
   `ready_stock_out` INT NULL,
   `warehouse_stock_in` INT NULL,
@@ -288,7 +288,7 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`supplier`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`supplier` (
-  `supplier_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `supplier_id` VARCHAR(40) NOT NULL,
   `name` VARCHAR(100) NULL,
   `supplier_type_id` VARCHAR(5) NULL,
   `gender` CHAR(1) NULL,
@@ -335,10 +335,10 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`purchase`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`purchase` (
-  `purchase_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
-  `item_id` BIGINT NULL,
-  `supplier_id` BIGINT NULL,
+  `purchase_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
+  `item_id` VARCHAR(40) NULL,
+  `supplier_id` VARCHAR(40) NULL,
   `price` DOUBLE NULL,
   `discount` DOUBLE NULL,
   `purchase_status_id` CHAR(3) NULL,
@@ -382,10 +382,10 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`admin`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`admin` (
-  `admin_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
+  `admin_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
   `name` VARCHAR(100) NULL,
-  `level_id` BIGINT NULL,
+  `level_id` VARCHAR(40) NULL,
   `gender` CHAR(1) NULL,
   `birth_day` DATE NULL,
   `phone` VARCHAR(20) NULL,
@@ -413,10 +413,10 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`seller`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`seller` (
-  `seller_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
+  `seller_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
   `name` VARCHAR(100) NULL,
-  `level_id` BIGINT NULL,
+  `level_id` VARCHAR(40) NULL,
   `gender` CHAR(1) NULL,
   `birth_day` DATE NULL,
   `phone` VARCHAR(20) NULL,
@@ -444,9 +444,9 @@ ENGINE = InnoDB;
 -- Table `point_of_sale`.`stock`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `point_of_sale`.`stock` (
-  `stock_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `store_id` BIGINT NULL,
-  `item_id` BIGINT NULL,
+  `stock_id` VARCHAR(40) NOT NULL,
+  `store_id` VARCHAR(40) NULL,
+  `item_id` VARCHAR(40) NULL,
   `ready_stock` INT NULL,
   `warehouse_stock` INT NULL,
   `time_create` DATETIME NULL,
